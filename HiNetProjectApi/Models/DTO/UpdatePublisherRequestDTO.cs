@@ -2,6 +2,5 @@
 {
     public class UpdatePublisherRequestDTO : BasePublisherDTO
     {
-        public Guid Id { get; set; }
     }
 }

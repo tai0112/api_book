@@ -52,7 +52,6 @@ namespace HiNetProjectApi.Controllers
             try
             {
                 var subGenre = await subGenreService.GetByIdAsync(id);
-                var test = "";
                 return Ok(subGenre);
             }
             catch(Exception ex)

@@ -31,14 +31,9 @@ namespace HiNetProjectApi.Repository
             return ageRating;
         }
 
-        public async Task<IEnumerable<AgeRating>> GetAllAsync(string? name = "")
+        public IQueryable<AgeRating> GetAllAsync()
         {
-            var ageRatings = db.AgeRatings.AsQueryable();
-            if (!string.IsNullOrEmpty(name))
-            {
-                ageRatings = ageRatings.Where(o => o.Name == name);
-            }
-            return await ageRatings.ToListAsync();
+            return db.AgeRatings.AsQueryable();
         }
 
         public async Task<AgeRating?> GetByIdAsync(Guid id)

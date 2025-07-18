@@ -20,27 +20,9 @@ namespace HiNetProjectApi.Repository
             return genre;
         }
 
-        public async Task<IEnumerable<Genre>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
-        {
-            var genres = db.Genres.AsQueryable();
-            if (!string.IsNullOrEmpty(name))
-            {
-                genres = genres.Where(o => o.Name.Contains(name));
-            }
-
-            if (timeCreated != null)
-            {
-                genres = genres.Where(o => o.CreateAt.Equals(timeCreated));
-            }
-
-            if (timeUpdated != null)
-            {
-                genres = genres.Where(o => o.UpdateAt.Equals(timeUpdated));
-            }
-
-            var result = await genres.Include(o => o.SubGenres).ToListAsync();
-           
-            return await genres.Include(o => o.SubGenres).ToListAsync();
+        public IQueryable<Genre> GetAllAsync()
+        {     
+            return db.Genres.Include(o => o.SubGenres).AsQueryable();
         }
 
         public async Task<Genre?> GetByIdAsync(Guid id)

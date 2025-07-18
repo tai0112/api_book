@@ -7,7 +7,6 @@ namespace HiNetProjectApi.Validators
     {
         public CoverTypeUpdateValidator()
         {
-            RuleFor(o => o.Id).NotEmpty();
             Include(new BaseCoverTypeValidator<UpdateCoverTypeRequestDTO>());
         }
     }

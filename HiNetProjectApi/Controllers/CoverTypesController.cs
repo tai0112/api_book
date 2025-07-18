@@ -62,6 +62,7 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpPut]
+        [Route("{id:guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCoverTypeRequestDTO updateCoverTypeRequestDTO)
         {
             try

@@ -25,7 +25,8 @@ namespace HiNetProjectApi.Models.Domain
         public int PageTotal { get; set; }
         public int YearPublish { get; set; }
         public bool IsActived { get; set; }
-        public Guid SubGenreId { get; set; }
+        public Guid? GenreId { get; set; }
+        public Guid? SubGenreId { get; set; }
         public Guid CoverTypeId { get; set; }
         public Guid AgeRatingId { get; set; }
         public int SoldTotal { get; set; }
@@ -34,6 +35,7 @@ namespace HiNetProjectApi.Models.Domain
         //Navigation properties
         public CoverType CoverType { get; set; }
         [JsonIgnore]
+        public Genre Genre { get; set; }
         public StockQuantity StockQuantity { get; set; }
         public SubGenre SubGenre { get; set; }
         public Publisher Publisher { get; set; }

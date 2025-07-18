@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
 namespace HiNetProjectApi.Services
@@ -38,8 +39,14 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<CoverTypeDTO>> GetAllAsync(string? name = null)
         {
-            var coverTypes = await coverTypeRepository.GetAllAsync(name);
-            return mapper.Map<IEnumerable<CoverTypeDTO>>(coverTypes);
+            var coverTypes = coverTypeRepository.GetAllAsync();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                coverTypes = coverTypes.Where(o => o.Name.Equals(name));
+            }
+            var result = await coverTypes.ToListAsync();
+            return mapper.Map<IEnumerable<CoverTypeDTO>>(result);
         }
 
         public async Task<CoverTypeDTO?> GetByIdAsync(Guid id)

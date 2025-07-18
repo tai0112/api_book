@@ -3,11 +3,11 @@ using HiNetProjectApi.Models.DTO;
 
 namespace HiNetProjectApi.Validators
 {
-    public class AgeRatingAddValidator : AbstractValidator<AddRequestAgeRatingDTO>
+    public class AgeRatingAddValidator : AbstractValidator<AddAgeRatingRequestDTO>
     {
         public AgeRatingAddValidator()
         {
-            Include(new BaseAgeRatingValidator<AddRequestAgeRatingDTO>());
+            Include(new BaseAgeRatingValidator<AddAgeRatingRequestDTO>());
         }
     }
 }

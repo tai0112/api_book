@@ -20,14 +20,9 @@ namespace HiNetProjectApi.Repository
             return cart;
         }
 
-        public async Task<IEnumerable<Cart?>> GetAllAsync(string userId)
-        {
-            var carts = db.Carts.AsQueryable();
-            if (!string.IsNullOrEmpty(userId))
-            {
-                carts = carts.Where(o => o.UserId == userId);
-            }
-            return await carts.Include(o => o.CartDetails).Include(o => o.User).ToListAsync();   
+        public IQueryable<Cart?> GetAllAsync()
+        {           
+            return db.Carts.Include(o => o.CartDetails).AsQueryable();   
         }
 
         public async Task<Cart?> GetByIdAsync(Guid id)

@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface IAgeRatingRepository
     {
-        Task<IEnumerable<AgeRating>> GetAllAsync(string? name = "");
+        IQueryable<AgeRating> GetAllAsync();
         Task<AgeRating?> GetByIdAsync(Guid id);
         Task<AgeRating> CreateAsync(AgeRating ageRating);
         Task<AgeRating> UpdateAsync(Guid id, AgeRating ageRating);

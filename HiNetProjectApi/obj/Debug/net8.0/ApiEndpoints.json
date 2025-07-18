@@ -1,5 +1,95 @@
 [
   {
+    "ContainingType": "HiNetProjectApi.Controllers.AgeRatingsController",
+    "Method": "GetAll",
+    "RelativePath": "api/AgeRatings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.AgeRatingsController",
+    "Method": "CreateAsync",
+    "RelativePath": "api/AgeRatings",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addAgeRatingRequestDTO",
+        "Type": "HiNetProjectApi.Models.DTO.AddAgeRatingRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.AgeRatingsController",
+    "Method": "GetAsync",
+    "RelativePath": "api/AgeRatings/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.AgeRatingsController",
+    "Method": "UpdateAsync",
+    "RelativePath": "api/AgeRatings/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateAgeRatingRequestDTO",
+        "Type": "HiNetProjectApi.Models.DTO.UpdateRequestAgeRatingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.AgeRatingsController",
+    "Method": "RemoveAsync",
+    "RelativePath": "api/AgeRatings/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HiNetProjectApi.Controllers.BooksController",
     "Method": "GetAll",
     "RelativePath": "api/Books",
@@ -316,27 +406,6 @@
   },
   {
     "ContainingType": "HiNetProjectApi.Controllers.CoverTypesController",
-    "Method": "Update",
-    "RelativePath": "api/CoverTypes",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "updateCoverTypeRequestDTO",
-        "Type": "HiNetProjectApi.Models.DTO.UpdateCoverTypeRequestDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HiNetProjectApi.Controllers.CoverTypesController",
     "Method": "Get",
     "RelativePath": "api/CoverTypes/{id}",
     "HttpMethod": "GET",
@@ -346,6 +415,27 @@
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.CoverTypesController",
+    "Method": "Update",
+    "RelativePath": "api/CoverTypes/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateCoverTypeRequestDTO",
+        "Type": "HiNetProjectApi.Models.DTO.UpdateCoverTypeRequestDTO",
         "IsRequired": true
       }
     ],

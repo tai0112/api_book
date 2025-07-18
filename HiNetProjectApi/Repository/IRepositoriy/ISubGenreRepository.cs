@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface ISubGenreRepository
     {
-        Task<IEnumerable<SubGenre>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null);
+        IQueryable<SubGenre> GetAllAsync();
         Task<SubGenre?> GetByIdAsync(Guid id);
         Task<SubGenre> CreateAsync(SubGenre subGenre);
         Task<SubGenre?> UpdateAsync(Guid id, SubGenre subGenre);

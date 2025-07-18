@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface IPublisherRepository
     {
-        Task<IEnumerable<Publisher>> GetAllAsync(string? name = "");
+        IQueryable<Publisher> GetAllAsync();
         Task<Publisher?> GetByIdAsync(Guid id);
         Task<Publisher> CreateAsync(Publisher publisher);
         Task<Publisher?> UpdateAsync(Guid id, Publisher publisher);

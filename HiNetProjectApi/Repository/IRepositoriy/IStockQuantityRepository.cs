@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface IStockQuantityRepository
     {
-        Task<IEnumerable<StockQuantity?>> GetAllAsync(Guid? bookId);
+        IQueryable<StockQuantity> GetAllAsync();
         Task<StockQuantity?> GetQuantity(Guid bookId);
         Task<StockQuantity?> GetByIdAsync(Guid id);
         Task<StockQuantity> CreateAsync(StockQuantity stockQuantity);

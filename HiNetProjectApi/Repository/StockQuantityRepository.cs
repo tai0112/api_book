@@ -20,14 +20,9 @@ namespace HiNetProjectApi.Repository
             return stockQuantity;
         }
 
-        public async Task<IEnumerable<StockQuantity?>> GetAllAsync(Guid? bookId)
+        public IQueryable<StockQuantity> GetAllAsync()
         {
-            var stockQuantities = db.StockQuantities.AsQueryable();
-            if (bookId != Guid.Empty && bookId != null)
-            {
-                stockQuantities = stockQuantities.Where(o => o.Equals(bookId));
-            }
-            return await stockQuantities.ToListAsync();
+            return db.StockQuantities.AsQueryable();
         }
 
         public async Task<StockQuantity?> GetByIdAsync(Guid id)

@@ -14,6 +14,11 @@ namespace HiNetProjectApi.Mappings
             CreateMap<AddRequestGenreDTO, Genre>().ReverseMap();
             CreateMap<UpdateRequestGenreDTO, Genre>().ReverseMap();
 
+            //Age rating mapper
+            CreateMap<AgeRatingDTO, AgeRating>().ReverseMap();
+            CreateMap<AddAgeRatingRequestDTO, AgeRating>().ReverseMap();
+            CreateMap<UpdateAgeRatingRequestDTO, AgeRating>().ReverseMap();
+
             //SubGenre mapper
             CreateMap<SubGenre, SubGenreDTO>().ReverseMap();
             CreateMap<AddSubGenreRequestDTO, SubGenre>().ReverseMap();

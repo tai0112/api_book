@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -36,7 +37,24 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<SubGenreDTO>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
         {
-            var subGenres = await subGenreRepository.GetAllAsync(name, timeCreated, timeUpdated);
+            var subGenres = subGenreRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(name))
+            {
+                subGenres = subGenres.Where(o => o.Name == name);
+            }
+
+            if (timeCreated != null)
+            {
+                subGenres = subGenres.Where(o => o.CreateAt == timeCreated);
+            }
+
+            if (timeUpdated != null)
+            {
+                subGenres = subGenres.Where(o => o.UpdateAt == timeUpdated);
+            }
+
+            var result = await subGenres.ToListAsync();
+
             return mapper.Map<List<SubGenreDTO>>(subGenres);
         }
 

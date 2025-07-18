@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -43,8 +44,25 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<GenreDTO>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
         {
-            var genres = await genreRepository.GetAllAsync(name, timeCreated, timeUpdated);
-            return mapper.Map<List<GenreDTO>>(genres);
+            var genres = genreRepository.GetAllAsync();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                genres = genres.Where(o => o.Name.Contains(name));
+            }
+
+            if (timeCreated != null)
+            {
+                genres = genres.Where(o => o.CreateAt.Equals(timeCreated));
+            }
+
+            if (timeUpdated != null)
+            {
+                genres = genres.Where(o => o.UpdateAt.Equals(timeUpdated));
+            }
+
+            var result = await genres.ToListAsync();
+            return mapper.Map<List<GenreDTO>>(result);
         }
 
         public async Task<GenreDTO> GetByIdAsync(Guid id)

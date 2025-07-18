@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -37,8 +38,69 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<BookDTO>> GetAllAsync(Guid? ageRating, Guid? coverType, string? name = "", string? code = "", string? note = "", string? author = "", string? description = "", string? language = "", float price = 0, int pageTotal = 0, string publisher = "", string? subGenre = "")
         {
-            var books = await bookRepository.GetAllAsync(ageRating, coverType, name, code, note, author, description, language, price, pageTotal, publisher);   
-            return mapper.Map<IEnumerable<BookDTO>>(books);
+            var books = bookRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(name))
+            {
+                books = books.Where(o => o.Name == name);
+            }
+
+            if (!string.IsNullOrEmpty(code))
+            {
+                books = books.Where(o => o.Code == code);
+            }
+
+            if (!string.IsNullOrEmpty(note))
+            {
+                books = books.Where(o => o.Note == note);
+            }
+
+            if (!string.IsNullOrEmpty(author))
+            {
+                books = books.Where(o => o.Author == author);
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                books = books.Where(o => o.Description == description);
+            }
+
+            if (!string.IsNullOrEmpty(language))
+            {
+                books = books.Where(o => o.Language == language);
+            }
+
+            if (coverType != Guid.Empty && coverType != null)
+            {
+                books = books.Where(o => o.CoverType.Id == coverType);
+            }
+
+            if (!string.IsNullOrEmpty(subGenre))
+            {
+                books = books.Where(o => o.SubGenre.Name == subGenre);
+            }
+
+            if (!string.IsNullOrEmpty(publisher))
+            {
+                books = books.Where(o => o.Publisher.Name == publisher);
+            }
+
+            if (ageRating != Guid.Empty && ageRating != null)
+            {
+                books = books.Where(o => o.AgeRating.Id == ageRating);
+            }
+
+            if (price > 0)
+            {
+                books = books.Where(o => o.PriceInit.Equals(price) || o.PriceBeforeDiscount.Equals(price));
+            }
+
+            if (pageTotal > 0)
+            {
+                books = books.Where(o => o.PageTotal.Equals(pageTotal));
+            }
+
+            var result = await books.ToListAsync();
+            return mapper.Map<IEnumerable<BookDTO>>(result);
         }
 
         public async Task<BookDTO?> GetByIdAsync(Guid id)

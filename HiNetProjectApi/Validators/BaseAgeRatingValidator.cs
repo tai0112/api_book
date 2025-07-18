@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
-using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 
 namespace HiNetProjectApi.Validators
 {
-    public class BaseAgeRatingValidator<T> : AbstractValidator<T> where T : BaseAgeRating
+    public class BaseAgeRatingValidator<T> : AbstractValidator<T> where T : BaseAgeRatingDTO
     {
         public BaseAgeRatingValidator()
         {

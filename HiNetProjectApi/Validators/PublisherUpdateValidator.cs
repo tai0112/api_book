@@ -7,7 +7,6 @@ namespace HiNetProjectApi.Validators
     {
         public PublisherUpdateValidator()
         {   
-            RuleFor(o => o.Id).NotEmpty();
             Include(new BasePublisherValidator<UpdatePublisherRequestDTO>());
         }
     }

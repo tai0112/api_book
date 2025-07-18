@@ -7,7 +7,6 @@ namespace HiNetProjectApi.Validators
     {
         public AgeRatingUpdateValidator()
         {
-            RuleFor(o => o.Id).NotEmpty();
             Include(new BaseAgeRatingValidator<UpdateRequestAgeRatingDTO>());
         }
     }

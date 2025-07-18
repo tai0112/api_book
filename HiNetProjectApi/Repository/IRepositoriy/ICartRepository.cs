@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface ICartRepository
     {
-        Task<IEnumerable<Cart?>> GetAllAsync(string userId);
+        IQueryable<Cart?> GetAllAsync();
         Task<Cart?> GetByIdAsync(Guid id);
         Task<Cart> CreateAsync(Cart cart);
         Task<Cart?> UpdateAsync(Guid id, Cart cart);

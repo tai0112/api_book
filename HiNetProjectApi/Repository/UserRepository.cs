@@ -26,23 +26,9 @@ namespace HiNetProjectApi.Repository
             throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllAsync(string? address = "", string? email = "", string? phone = "", string? username = "")
+        public IQueryable<ApplicationUser> GetAllAsync()
         {
-            var query = userManager.Users.Include(o => o.Cart).AsQueryable();
-
-            if (!string.IsNullOrEmpty(address))
-                query = query.Where(u => u.Address.Contains(address));
-
-            if (!string.IsNullOrEmpty(email))
-                query = query.Where(u => u.Email.Contains(email));
-
-            if (!string.IsNullOrEmpty(phone))
-                query = query.Where(u => u.PhoneNumber.Contains(phone));
-
-            if (!string.IsNullOrEmpty(username))
-                query = query.Where(u => u.UserName.Contains(username));
-
-            return await query.ToListAsync();
+            return userManager.Users.Include(o => o.Cart).AsQueryable();
         }
 
         // Lấy user theo Id

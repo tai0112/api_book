@@ -7,6 +7,7 @@ using HiNetProjectApi.Repository.IRepositoriy;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HiNetProjectApi.Services
 {
@@ -54,8 +55,26 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<UserDTO>> GetAllAsync(string address = "", string email = "", string phone = "", string username = "")
         {
-            var users = await userRepository.GetAllAsync(address, email, phone, username);
-            return mapper.Map<IEnumerable<UserDTO>>(users);
+            var query = userRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(address))
+            {
+                query = query.Where(u => u.Address.Contains(address));
+            }
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(u => u.Email.Contains(email));
+            }
+            if (!string.IsNullOrEmpty(phone))
+            {
+                query = query.Where(u => u.PhoneNumber.Contains(phone));
+            }
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                query = query.Where(u => u.UserName.Contains(username));
+            }
+
+            return mapper.Map<IEnumerable<UserDTO>>(query);
         }
 
         public async Task<UserDTO?> GetByIdAsync(Guid id)

@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using HiNetProjectApi.Data;
 using HiNetProjectApi.Mappings;
 using HiNetProjectApi.Models.Domain;
+using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository;
 using HiNetProjectApi.Repository.IRepositoriy;
 using HiNetProjectApi.Repository.IRepository;
@@ -102,6 +103,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<LoginUserValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 
 //Services Injection
+builder.Services.AddScoped<IAgeRatingService, AgeRatingService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<ISubGenreService, SubGenreService>();
 builder.Services.AddScoped<IPublisherService, PublisherService>();

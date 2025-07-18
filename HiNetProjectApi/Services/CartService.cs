@@ -6,8 +6,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Tokens.Experimental;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -40,8 +39,13 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<CartDTO?>> GetAllAsync(string userId)
         {
-            var carts = await cartRepository.GetAllAsync(userId);
-            return mapper.Map<IEnumerable<CartDTO>>(carts);
+            var carts = cartRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                carts = carts.Where(o => o.UserId == userId);
+            }
+            var result = await carts.ToListAsync();
+            return mapper.Map<IEnumerable<CartDTO>>(result);
         }
 
         public async Task<CartDTO?> GetByIdAsync(Guid id)

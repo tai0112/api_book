@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -54,8 +55,13 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<CartDetailDTO?>> GetAllAsync(Guid cartId)
         {
-            var cartDetails = await cartDetailRepository.GetAllAsync(cartId);
-            return mapper.Map<IEnumerable<CartDetailDTO>>(cartDetails);
+            var cartDetails = cartDetailRepository.GetAllAsync();
+            if (cartId != Guid.Empty)
+            {
+                cartDetails = cartDetails.Where(o => o.Id == cartId);
+            }
+            var result = await cartDetails.ToListAsync();
+            return mapper.Map<IEnumerable<CartDetailDTO>>(result);
         }
 
         public async Task<CartDetailDTO?> GetByIdAsync(Guid id)

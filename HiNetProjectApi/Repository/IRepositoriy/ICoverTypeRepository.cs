@@ -4,7 +4,7 @@ namespace HiNetProjectApi.Repository.IRepository
 {
     public interface ICoverTypeRepository
     {
-        Task<IEnumerable<CoverType>> GetAllAsync(string? name = "");
+        IQueryable<CoverType> GetAllAsync();
         Task<CoverType?> GetByIdAsync(Guid id);
         Task<CoverType> CreateAsync(CoverType coverType);
         Task<CoverType?> UpdateAsync(Guid id, CoverType coverType);

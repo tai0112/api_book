@@ -156,3 +156,4 @@ D:\HiNetProjectApi\HiNetProjectApi\obj\Debug\net8.0\ref\HiNetProjectApi.dll
 D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.dll
 D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\HiNetProjectApi\HiNetProjectApi\obj\Debug\net8.0\HiNetProjectApi.sourcelink.json

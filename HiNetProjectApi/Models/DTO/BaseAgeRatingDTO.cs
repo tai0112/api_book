@@ -1,7 +1,8 @@
 ﻿namespace HiNetProjectApi.Models.DTO
 {
-    public class BaseAgeRating
+    public class BaseAgeRatingDTO
     {
         public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

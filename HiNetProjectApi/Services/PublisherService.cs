@@ -5,6 +5,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -37,8 +38,13 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<PublisherDTO>> GetAllAsync(string? name = "")
         {
-            var publishers = await publisherRepository.GetAllAsync(name);
-            return mapper.Map<IEnumerable<PublisherDTO>>(publishers);
+            var publishers = publisherRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(name))
+            {
+                publishers = publishers.Where(o => o.Name.Equals(name));
+            }
+            var result = await publishers.ToListAsync();
+            return mapper.Map<IEnumerable<PublisherDTO>>(result);
         }
 
         public async Task<PublisherDTO?> GetByIdAsync(Guid id)

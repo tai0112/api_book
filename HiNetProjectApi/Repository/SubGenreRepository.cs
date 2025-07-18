@@ -20,25 +20,9 @@ namespace HiNetProjectApi.Repository
             return subGenre;
         }
 
-        public async Task<IEnumerable<SubGenre>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
+        public IQueryable<SubGenre> GetAllAsync()
         {
-            var subGenres = db.SubGenres.AsQueryable();
-            if (!string.IsNullOrEmpty(name))
-            {
-                subGenres = subGenres.Where(o => o.Name == name);
-            }
-
-            if (timeCreated != null)
-            {
-                subGenres = subGenres.Where(o => o.CreateAt == timeCreated);
-            }
-
-            if (timeUpdated != null)
-            {
-                subGenres = subGenres.Where(o => o.UpdateAt == timeUpdated);
-            }
-
-            return await subGenres.ToListAsync();
+            return db.SubGenres.AsQueryable();
         }
         public async Task<SubGenre?> GetByIdAsync(Guid id)
         {

@@ -20,14 +20,9 @@ namespace HiNetProjectApi.Repository
             return publisher;
         }
 
-        public async Task<IEnumerable<Publisher>> GetAllAsync(string? name = "")
+        public IQueryable<Publisher> GetAllAsync()
         {
-            var publisers = db.Publishers.AsQueryable();
-            if (!string.IsNullOrEmpty(name))
-            {
-                publisers = publisers.Where(o => o.Name.Equals(name));
-            }
-            return await publisers.ToListAsync();
+            return db.Publishers.AsQueryable();
         }
 
         public async Task<Publisher?> GetByIdAsync(Guid id)

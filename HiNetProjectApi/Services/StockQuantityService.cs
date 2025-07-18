@@ -6,6 +6,7 @@ using HiNetProjectApi.Models.Domain;
 using HiNetProjectApi.Models.DTO;
 using HiNetProjectApi.Repository.IRepository;
 using HiNetProjectApi.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace HiNetProjectApi.Services
 {
@@ -40,8 +41,13 @@ namespace HiNetProjectApi.Services
 
         public async Task<IEnumerable<StockQuantityDTO?>> GetAllAsync(Guid? bookId)
         {
-            var stockQuantities = await stockQuantityRepository.GetAllAsync(bookId);
-            return mapper.Map<List<StockQuantityDTO?>>(stockQuantities);
+            var stockQuantities = stockQuantityRepository.GetAllAsync();
+            if (bookId != Guid.Empty && bookId != null)
+            {
+                stockQuantities = stockQuantities.Where(x => x.BookId == bookId);
+            }
+            var result = await stockQuantities.ToListAsync();
+            return mapper.Map<List<StockQuantityDTO?>>(result);
         }
 
         public async Task<StockQuantityDTO?> GetByIdAsync(Guid id)

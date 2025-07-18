@@ -20,14 +20,9 @@ namespace HiNetProjectApi.Repository
             return coverType;
         }
 
-        public async Task<IEnumerable<CoverType>> GetAllAsync(string? name = "")
+        public IQueryable<CoverType> GetAllAsync()
         {
-            var coverTypes = db.CoverTypes.AsQueryable();
-            if (!string.IsNullOrEmpty(name))
-            {
-                coverTypes = coverTypes.Where(o => o.Name.Equals(name));
-            }
-            return await coverTypes.ToListAsync();
+            return db.CoverTypes.AsQueryable();
         }
 
         public async Task<CoverType?> GetByIdAsync(Guid id)
