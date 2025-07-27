@@ -15,13 +15,17 @@ namespace HiNetProjectApi.Services
         private readonly IValidator<AddBookRequestDTO> addValidator;
         private readonly IValidator<UpdateBookRequestDTO> updateValidator;
         private readonly IMapper mapper;
+        private readonly IBookImageService bookImageService;
+        private readonly ILogService logger;
 
-        public BookService(IBookRepository bookRepository, IValidator<AddBookRequestDTO> addValidator, IValidator<UpdateBookRequestDTO> updateValidator, IMapper mapper)
+        public BookService(IBookRepository bookRepository, IValidator<AddBookRequestDTO> addValidator, IValidator<UpdateBookRequestDTO> updateValidator, IMapper mapper, IBookImageService bookImageService, ILogService logger)
         {
             this.bookRepository = bookRepository;
             this.addValidator = addValidator;
             this.updateValidator = updateValidator;
             this.mapper = mapper;
+            this.bookImageService = bookImageService;
+            this.logger = logger;
         }
         public async Task<BookDTO> CreateAsync(AddBookRequestDTO addBookRequestDTO)
         {
@@ -30,73 +34,83 @@ namespace HiNetProjectApi.Services
             {
                 throw new ArgumentException(ValidationHelper.FormatErrors(validation.Errors));
             }
-
-            var bookDomain = mapper.Map<Book>(addBookRequestDTO);
-            var book = await bookRepository.CreateAsync(bookDomain);
-            return mapper.Map<BookDTO>(book);
+            try
+            {
+                var bookDomain = mapper.Map<Book>(addBookRequestDTO);
+                bookDomain.Code = GenerateProductCode();
+                var book = await bookRepository.CreateAsync(bookDomain);
+                return mapper.Map<BookDTO>(book);
+            }
+            catch (DbUpdateException ex)
+            {
+                logger.Error(ex.InnerException.Message, "Error updating book", ex.Message);
+                throw;
+            }
         }
-
-        public async Task<IEnumerable<BookDTO>> GetAllAsync(Guid? ageRating, Guid? coverType, string? name = "", string? code = "", string? note = "", string? author = "", string? description = "", string? language = "", float price = 0, int pageTotal = 0, string publisher = "", string? subGenre = "")
+        public async Task<IEnumerable<BookDTO>> GetAllAsync(SearchBookDTO search)
         {
             var books = bookRepository.GetAllAsync();
-            if (!string.IsNullOrEmpty(name))
+            if (search != null)
             {
-                books = books.Where(o => o.Name == name);
-            }
+                if (!string.IsNullOrEmpty(search.Name))
+                {
+                    books = books.Where(o => o.Name == search.Name);
+                }
 
-            if (!string.IsNullOrEmpty(code))
-            {
-                books = books.Where(o => o.Code == code);
-            }
+                if (!string.IsNullOrEmpty(search.Code))
+                {
+                    books = books.Where(o => o.Code == search.Code);
+                }
 
-            if (!string.IsNullOrEmpty(note))
-            {
-                books = books.Where(o => o.Note == note);
-            }
+                if (!string.IsNullOrEmpty(search.Note))
+                {
+                    books = books.Where(o => o.Note == search.Note);
+                }
 
-            if (!string.IsNullOrEmpty(author))
-            {
-                books = books.Where(o => o.Author == author);
-            }
+                if (!string.IsNullOrEmpty(search.Author))
+                {
+                    books = books.Where(o => o.Author == search.Author);
+                }
 
-            if (!string.IsNullOrEmpty(description))
-            {
-                books = books.Where(o => o.Description == description);
-            }
+                if (!string.IsNullOrEmpty(search.Description))
+                {
+                    books = books.Where(o => o.Description == search.Description);
+                }
 
-            if (!string.IsNullOrEmpty(language))
-            {
-                books = books.Where(o => o.Language == language);
-            }
+                if (!string.IsNullOrEmpty(search.Language))
+                {
+                    books = books.Where(o => o.Language == search.Language);
+                }
 
-            if (coverType != Guid.Empty && coverType != null)
-            {
-                books = books.Where(o => o.CoverType.Id == coverType);
-            }
+                if (search.CoverType != Guid.Empty)
+                {
+                    books = books.Where(o => o.CoverType.Id == search.CoverType);
+                }
 
-            if (!string.IsNullOrEmpty(subGenre))
-            {
-                books = books.Where(o => o.SubGenre.Name == subGenre);
-            }
+                if (!string.IsNullOrEmpty(search.SubGenreId))
+                {
+                    books = books.Where(o => o.SubGenre.Name == search.SubGenreId);
+                }
 
-            if (!string.IsNullOrEmpty(publisher))
-            {
-                books = books.Where(o => o.Publisher.Name == publisher);
-            }
+                if (!string.IsNullOrEmpty(search.Publisher))
+                {
+                    books = books.Where(o => o.Publisher.Name == search.Publisher);
+                }
 
-            if (ageRating != Guid.Empty && ageRating != null)
-            {
-                books = books.Where(o => o.AgeRating.Id == ageRating);
-            }
+                if (search.AgeRating != Guid.Empty)
+                {
+                    books = books.Where(o => o.AgeRating.Id == search.AgeRating);
+                }
 
-            if (price > 0)
-            {
-                books = books.Where(o => o.PriceInit.Equals(price) || o.PriceBeforeDiscount.Equals(price));
-            }
+                if (search.Price > 0)
+                {
+                    books = books.Where(o => o.PriceInit.Equals(search.Price) || o.PriceBeforeDiscount.Equals(search.Price));
+                }
 
-            if (pageTotal > 0)
-            {
-                books = books.Where(o => o.PageTotal.Equals(pageTotal));
+                if (search.PageTotal > 0)
+                {
+                    books = books.Where(o => o.PageTotal == (search.PageTotal));
+                }
             }
 
             var result = await books.ToListAsync();
@@ -112,7 +126,20 @@ namespace HiNetProjectApi.Services
         public async Task<BookDTO?> RemoveAsync(Guid id)
         {
             var book = await bookRepository.RemoveAsync(id);
-            return mapper.Map<BookDTO>(book);
+            var search = new SearchBookImageDTO()
+            {
+                BookId = id,
+            };
+            try
+            {
+                await bookImageService.RemoveRange(search);
+                return mapper.Map<BookDTO>(book);
+            }
+            catch (DbUpdateException ex)
+            {
+                logger.Error(ex.InnerException.Message, "Error updating book with ID: {Id}", id);
+                throw;
+            }
         }
 
         public async Task<BookDTO?> UpdateAsync(Guid id, UpdateBookRequestDTO updateBookRequestDTO)
@@ -123,9 +150,30 @@ namespace HiNetProjectApi.Services
                 throw new ArgumentException(ValidationHelper.FormatErrors(validation.Errors));
             }
 
-            var bookDomain = mapper.Map<Book>(updateBookRequestDTO);
-            var book = await bookRepository.UpdateAsync(id, bookDomain);
-            return mapper.Map<BookDTO>(book);
+            try
+            {
+                var bookDomain = mapper.Map<Book>(updateBookRequestDTO);
+                var book = await bookRepository.UpdateAsync(id, bookDomain);
+
+                if (book == null)
+                {
+                    logger.Warn("Không tìm thấy thông tin sách cần cập nhật", id);
+                    return null;
+                }
+
+                return mapper.Map<BookDTO>(book);
+            }
+            catch (DbUpdateException ex)
+            {
+                logger.Error(ex.InnerException.Message, "Error updating book with ID: {Id}", id);
+                throw;
+            }
+        }
+
+        public string GenerateProductCode()
+        {
+            var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"); // ví dụ: 20250724123501234
+            return $"SP-{timestamp}";
         }
     }
 }

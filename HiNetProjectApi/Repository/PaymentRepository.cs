@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public async Task<IEnumerable<Payment>> GetAllAsync(string? userId, Guid? orderId, DateTime? timeCreated, DateTime? timeUpdated, float? price, string? note = "")
         {
-            var payments = db.Payments.AsQueryable();
+            var payments = db.Payments.AsNoTracking().AsQueryable();
             if (!string.IsNullOrEmpty(userId))
             {
                 payments = payments.Where(o => o.UserId == userId);

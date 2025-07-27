@@ -35,22 +35,17 @@ namespace HiNetProjectApi.Services
             return mapper.Map<SubGenreDTO>(subGenre);
         }
 
-        public async Task<IEnumerable<SubGenreDTO>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
+        public async Task<IEnumerable<SubGenreDTO>> GetAllAsync(SearchSubGenreDTO search)
         {
             var subGenres = subGenreRepository.GetAllAsync();
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(search.Name))
             {
-                subGenres = subGenres.Where(o => o.Name == name);
+                subGenres = subGenres.Where(o => o.Name == search.Name);
             }
 
-            if (timeCreated != null)
+            if (search.GenreId != null)
             {
-                subGenres = subGenres.Where(o => o.CreateAt == timeCreated);
-            }
-
-            if (timeUpdated != null)
-            {
-                subGenres = subGenres.Where(o => o.UpdateAt == timeUpdated);
+                subGenres = subGenres.Where(o => o.GenreId == search.GenreId);
             }
 
             var result = await subGenres.ToListAsync();

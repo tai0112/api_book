@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<Publisher> GetAllAsync()
         {
-            return db.Publishers.AsQueryable();
+            return db.Publishers.AsNoTracking().AsQueryable();
         }
 
         public async Task<Publisher?> GetByIdAsync(Guid id)

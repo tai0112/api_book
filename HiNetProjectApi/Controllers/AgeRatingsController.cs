@@ -17,11 +17,11 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string name = "", [FromQuery] string description = "")
+        public async Task<IActionResult> GetAll([FromQuery] SearchAgeRatingDTO search)
         {
             try
             {
-                var ageRatings = await ageRatingService.GetAgeRatingsAsync(name, description);
+                var ageRatings = await ageRatingService.GetAgeRatingsAsync(search);
                 return Ok(ageRatings);
             }
             catch (Exception ex)
@@ -34,9 +34,22 @@ namespace HiNetProjectApi.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> GetAsync([FromRoute] Guid id)
         {
+            var ageRating = await ageRatingService.GetAgeRatingAsync(id);
+            if (ageRating == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ageRating);
+        }
+        
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync([FromBody] AddAgeRatingRequestDTO addAgeRatingRequestDTO)
+        {
             try
             {
-                var ageRating = await ageRatingService.GetAgeRatingAsync(id);
+                var ageRating = await ageRatingService.CreateAsync(addAgeRatingRequestDTO);
                 return Ok(ageRating);
             }
             catch (Exception ex)
@@ -45,25 +58,11 @@ namespace HiNetProjectApi.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] AddAgeRatingRequestDTO addAgeRatingRequestDTO)
-        {
-            try
-            {
-                var ageRating = await ageRatingService.CreateAsync(addAgeRatingRequestDTO);
-                return CreatedAtAction(nameof(GetAsync), new { Id = ageRating.Id }, ageRating);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
-        
 
         [HttpPut]
         [Route("{id:guid}")]
-        public async Task<IActionResult> UpdateAsync([FromRoute] Guid id,[FromBody] UpdateRequestAgeRatingDTO updateAgeRatingRequestDTO)
+        public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, [FromBody] UpdateRequestAgeRatingDTO updateAgeRatingRequestDTO)
         {
             try
             {
@@ -84,7 +83,8 @@ namespace HiNetProjectApi.Controllers
             {
                 var ageRating = await ageRatingService.RemoveAsync(id);
                 return Ok(ageRating);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

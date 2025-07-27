@@ -20,6 +20,7 @@ namespace HiNetProjectApi.Repository
         }
         public async Task<BookImage> CreateAsync(BookImage bookImage)
         {
+            bookImage.FileName = $"{DateTime.Now.Ticks}{Path.GetExtension(bookImage.FileName)}";
             var localPath = Path.Combine(webHostEnvironment.ContentRootPath, "Images", $"{bookImage.FileName}{bookImage.FileExtension}");
 
             //Upload image to local path
@@ -41,31 +42,20 @@ namespace HiNetProjectApi.Repository
             var bookImage = await GetByIdAsync(id);
             if (bookImage != null)
             {
+                var localPath = Path.Combine(webHostEnvironment.ContentRootPath, "Images", $"{bookImage.FileName}{bookImage.FileExtension}");
+                if (System.IO.File.Exists(localPath))
+                {
+                    System.IO.File.Delete(localPath);
+                }
                 db.BookImages.Remove(bookImage);
                 await db.SaveChangesAsync();
             }
             return bookImage;
         }
 
-        public async Task<IEnumerable<BookImage>> GetAllAsync(Guid? bookId, bool? isMain, string? fileName = "")
-        {
-            var bookImages = db.BookImages.AsQueryable();
-            if (bookId != Guid.Empty)
-            {
-                bookImages = bookImages.Where(o => o.BookId  == bookId);
-            }
-
-            if (isMain != null)
-            {
-                bookImages = bookImages.Where(o => o.IsMain == isMain);
-            }
-
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                bookImages = bookImages.Where(o => o.FileName == fileName);
-            }
-
-            return await bookImages.ToListAsync();
+        public IQueryable<BookImage> GetAllAsync()
+        {   
+            return db.BookImages.AsNoTracking().AsQueryable();
         }
 
         public async Task<BookImage?> GetByIdAsync(Guid id)

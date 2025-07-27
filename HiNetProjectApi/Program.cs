@@ -74,6 +74,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IStockQuantityRepository, StockQuantityRepository>();
 
+//Logger
+builder.Services.AddSingleton<ILogService, LogService>();
+
+
 //Fluent Validation
 builder.Services.AddValidatorsFromAssemblyContaining<AgeRatingAddValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<AgeRatingUpdateValidator>();
@@ -101,6 +105,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<PublisherAddValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PublisherUpdateValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginUserValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<BookImageAddValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<BookImageUpdateValidator>();
 
 //Services Injection
 builder.Services.AddScoped<IAgeRatingService, AgeRatingService>();
@@ -112,6 +118,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICartDetailService, CartDetailService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBookImageService, BookImageService>();
 builder.Services.AddScoped<IStockQuantityService, StockQuantityService>();
 
 //Config mapper

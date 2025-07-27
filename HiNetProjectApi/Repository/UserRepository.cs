@@ -28,7 +28,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<ApplicationUser> GetAllAsync()
         {
-            return userManager.Users.Include(o => o.Cart).AsQueryable();
+            return userManager.Users.Include(o => o.Cart).AsNoTracking().AsQueryable();
         }
 
         // Lấy user theo Id

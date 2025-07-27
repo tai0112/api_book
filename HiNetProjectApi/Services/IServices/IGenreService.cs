@@ -8,7 +8,7 @@ namespace HiNetProjectApi.Services.IServices
         Task<GenreDTO> DeleteAsync(Guid id);
         Task<GenreDTO> UpdateAsync(Guid id, UpdateRequestGenreDTO genreDTO);
         Task<GenreDTO> GetByIdAsync(Guid id);
-        Task<IEnumerable<GenreDTO>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null);
+        Task<IEnumerable<GenreDTO>> GetAllAsync(SearchGenreDTO search);
 
     }
 }

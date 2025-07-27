@@ -12,19 +12,17 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "Name",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "description",
+            "name": "Description",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           }
         ],
@@ -148,6 +146,114 @@
         }
       }
     },
+    "/api/BookImages": {
+      "get": {
+        "tags": [
+          "BookImages"
+        ],
+        "parameters": [
+          {
+            "name": "BookId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "FileName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "IsMain",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BookImages"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "BookId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "FileDescription": {
+                    "type": "string"
+                  },
+                  "IsMain": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "encoding": {
+                "BookId": {
+                  "style": "form"
+                },
+                "File": {
+                  "style": "form"
+                },
+                "FileDescription": {
+                  "style": "form"
+                },
+                "IsMain": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BookImages/{id}": {
+      "delete": {
+        "tags": [
+          "BookImages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Books": {
       "get": {
         "tags": [
@@ -155,7 +261,7 @@
         ],
         "parameters": [
           {
-            "name": "ageRating",
+            "name": "CoverType",
             "in": "query",
             "schema": {
               "type": "string",
@@ -163,7 +269,7 @@
             }
           },
           {
-            "name": "coverType",
+            "name": "AgeRating",
             "in": "query",
             "schema": {
               "type": "string",
@@ -171,85 +277,82 @@
             }
           },
           {
-            "name": "name",
+            "name": "Name",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "code",
+            "name": "Code",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "note",
+            "name": "Note",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "author",
+            "name": "Author",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "description",
+            "name": "Description",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "language",
+            "name": "Language",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "price",
+            "name": "Price",
             "in": "query",
             "schema": {
               "type": "number",
-              "format": "float",
-              "default": 0
+              "format": "float"
             }
           },
           {
-            "name": "pageTotal",
+            "name": "PageTotal",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 0
+              "format": "int32"
             }
           },
           {
-            "name": "publisher",
+            "name": "Publisher",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           },
           {
-            "name": "subGenre",
+            "name": "SubGenreId",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
+            }
+          },
+          {
+            "name": "GenreId",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -290,6 +393,27 @@
       }
     },
     "/api/Books/{id}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Books"
@@ -774,11 +898,10 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "Name",
             "in": "query",
             "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           }
         ],
@@ -1178,27 +1301,18 @@
         ],
         "parameters": [
           {
-            "name": "timeCreate",
+            "name": "GenreId",
             "in": "query",
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "uuid"
             }
           },
           {
-            "name": "timeUpdate",
+            "name": "Name",
             "in": "query",
             "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           }
         ],
@@ -1510,10 +1624,6 @@
       "AddBookRequestDTO": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -1571,11 +1681,18 @@
           },
           "subGenreId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "genreId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           },
           "coverTypeId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "ageRatingId": {
             "type": "string",
@@ -1753,10 +1870,6 @@
       "UpdateBookRequestDTO": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -1814,11 +1927,18 @@
           },
           "subGenreId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "genreId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           },
           "coverTypeId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "ageRatingId": {
             "type": "string",

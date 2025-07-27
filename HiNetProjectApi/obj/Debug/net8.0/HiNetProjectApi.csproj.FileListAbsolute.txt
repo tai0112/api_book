@@ -157,3 +157,10 @@ D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.dll
 D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 D:\HiNetProjectApi\HiNetProjectApi\obj\Debug\net8.0\HiNetProjectApi.sourcelink.json
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.Mvc.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.Razor.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.Helpers.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\System.Web.WebPages.dll
+D:\HiNetProjectApi\HiNetProjectApi\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll

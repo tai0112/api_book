@@ -65,6 +65,11 @@ namespace HiNetProjectApi.Mappings
             CreateMap<ApplicationUser, RegisterUserRequestDTO>().ReverseMap();
             CreateMap<ApplicationUser, UpdateUserRequestDTO>().ReverseMap();
 
+            //Book image
+            CreateMap<BookImage, BookImageDTO>().ReverseMap();
+            CreateMap<BookImage, AddBookImageRequestDTO>().ReverseMap();
+            CreateMap<BookImage, UpdateBookImageRequestDTO>().ReverseMap();
+            
 
         }
     }

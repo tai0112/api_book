@@ -19,11 +19,26 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] Guid? ageRating = null, [FromQuery] Guid? coverType = null, [FromQuery] string? name = "", [FromQuery] string? code = "", [FromQuery] string? note = "", [FromQuery] string? author = "", [FromQuery] string? description = "", [FromQuery] string? language = "", [FromQuery] float price = 0, [FromQuery] int pageTotal = 0, [FromQuery] string publisher = "", [FromQuery] string? subGenre = "")
+        public async Task<IActionResult> GetAll([FromQuery] SearchBookDTO search)
         {
             try
             {
-                var books = await bookService.GetAllAsync();
+                var books = await bookService.GetAllAsync(search);
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        { 
+            try
+            {
+                var books = await bookService.GetByIdAsync(id);
                 return Ok(books);
             }
             catch (Exception ex)

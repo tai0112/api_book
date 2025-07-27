@@ -24,6 +24,7 @@ namespace HiNetProjectApi.Models.DTO
         public int YearPublish { get; set; }
         public bool IsActived { get; set; }
         public Guid SubGenreId { get; set; }
+        public Guid GenreId { get; set; }
         public Guid CoverTypeId { get; set; }
         public Guid AgeRatingId { get; set; }
         public Guid StockQuantityId { get; set; }
@@ -32,9 +33,12 @@ namespace HiNetProjectApi.Models.DTO
         public Guid PublisherId { get; set; }
         //Navigation properties
         public CoverType CoverType { get; set; }
+        public Genre Genre { get; set; }
         public StockQuantityDTO StockQuantity { get; set; }
         public SubGenre SubGenre { get; set; }
         public Publisher Publisher { get; set; }
         public AgeRating AgeRating { get; set; }
+        public IEnumerable<BookImage?> BookImages { get; set; }
+
     }
 }

@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<CoverType> GetAllAsync()
         {
-            return db.CoverTypes.AsQueryable();
+            return db.CoverTypes.AsNoTracking().AsQueryable();
         }
 
         public async Task<CoverType?> GetByIdAsync(Guid id)

@@ -1,4 +1,7 @@
-﻿using FluentValidation.Results;
+﻿using System.Web.Mvc;
+using FluentValidation.Results;
+using HiNetProjectApi.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HiNetProjectApi.Helpers
 {

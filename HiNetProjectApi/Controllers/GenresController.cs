@@ -24,11 +24,11 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string name = "")
+        public async Task<IActionResult> GetAll([FromQuery] SearchGenreDTO search)
         {
             try
             {
-                var genres = await genreService.GetAllAsync(name);
+                var genres = await genreService.GetAllAsync(search);
                 return Ok(genres);
             }
             catch (Exception ex)

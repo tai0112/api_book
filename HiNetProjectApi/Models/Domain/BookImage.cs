@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HiNetProjectApi.Models.Domain
 {
@@ -14,6 +15,7 @@ namespace HiNetProjectApi.Models.Domain
         public string FileExtension { get; set; }
         public long FileSizeInBytes { get; set; }
         public bool IsMain { get; set; } = false;
+        [JsonIgnore]
         public Book Book { get; set; }
     }
 }

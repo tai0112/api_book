@@ -18,11 +18,11 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] DateTime timeCreate, [FromQuery] DateTime timeUpdate, [FromQuery] string name = "")
+        public async Task<IActionResult> GetAll([FromQuery] SearchSubGenreDTO search)
         {
             try
             {
-                var subGenres = await subGenreService.GetAllAsync();
+                var subGenres = await subGenreService.GetAllAsync(search);
                 return Ok(subGenres);
             }
             catch (Exception ex)

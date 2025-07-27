@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<StockQuantity> GetAllAsync()
         {
-            return db.StockQuantities.AsQueryable();
+            return db.StockQuantities.AsNoTracking().AsQueryable();
         }
 
         public async Task<StockQuantity?> GetByIdAsync(Guid id)

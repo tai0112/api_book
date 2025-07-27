@@ -8,12 +8,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "description",
+        "Name": "Description",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -90,6 +90,79 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HiNetProjectApi.Controllers.BookImagesController",
+    "Method": "GetAll",
+    "RelativePath": "api/BookImages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BookId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.BookImagesController",
+    "Method": "Create",
+    "RelativePath": "api/BookImages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BookId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.BookImagesController",
+    "Method": "Remove",
+    "RelativePath": "api/BookImages/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HiNetProjectApi.Controllers.BooksController",
     "Method": "GetAll",
     "RelativePath": "api/Books",
@@ -98,62 +171,67 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ageRating",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "CoverType",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
-        "Name": "coverType",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "AgeRating",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
-        "Name": "name",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "code",
+        "Name": "Code",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "note",
+        "Name": "Note",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "author",
+        "Name": "Author",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "description",
+        "Name": "Description",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "language",
+        "Name": "Language",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "price",
+        "Name": "Price",
         "Type": "System.Single",
         "IsRequired": false
       },
       {
-        "Name": "pageTotal",
+        "Name": "PageTotal",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "publisher",
+        "Name": "Publisher",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "subGenre",
+        "Name": "SubGenreId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "GenreId",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -171,6 +249,22 @@
       {
         "Name": "addBookRequestDTO",
         "Type": "HiNetProjectApi.Models.DTO.AddBookRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HiNetProjectApi.Controllers.BooksController",
+    "Method": "GetById",
+    "RelativePath": "api/Books/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -466,7 +560,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -721,17 +815,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "timeCreate",
-        "Type": "System.DateTime",
+        "Name": "GenreId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
-        "Name": "timeUpdate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "name",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       }

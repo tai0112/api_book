@@ -33,7 +33,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<AgeRating> GetAllAsync()
         {
-            return db.AgeRatings.AsQueryable();
+            return db.AgeRatings.AsNoTracking().AsQueryable();
         }
 
         public async Task<AgeRating?> GetByIdAsync(Guid id)

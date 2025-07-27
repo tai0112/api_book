@@ -32,25 +32,24 @@ namespace HiNetProjectApi.Repository
             return order;
         }
 
-        public async Task<IEnumerable<Order>> GetAllAsync(Guid userId, string? status, DateTime? timeCreated)
+        public IQueryable<Order> GetAllAsync()
         {
-            var orders = db.Orders.AsQueryable();
-            if (userId != Guid.Empty)
-            {
-                orders = orders.Where(o => o.Id == userId);
-            }
+            //Sau chuyển vào service
+            //if (userId != Guid.Empty)
+            //{
+            //    orders = orders.Where(o => o.Id == userId);
+            //}
 
-            if (status != null)
-            {
-                orders = orders.Where(o => o.Status == status);
-            }
+            //if (status != null)
+            //{
+            //    orders = orders.Where(o => o.Status == status);
+            //}
 
-            if (timeCreated != null)
-            {
-                orders = orders.Where(o => o.CreateAt == timeCreated);
-            }
-
-            return await orders.ToListAsync();
+            //if (timeCreated != null)
+            //{
+            //    orders = orders.Where(o => o.CreateAt == timeCreated);
+            //}
+            return db.Orders.AsNoTracking().AsQueryable();
         }
 
         public async Task<Order?> GetByIdAsync(Guid id)

@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<SubGenre> GetAllAsync()
         {
-            return db.SubGenres.AsQueryable();
+            return db.SubGenres.AsNoTracking().AsQueryable();
         }
         public async Task<SubGenre?> GetByIdAsync(Guid id)
         {

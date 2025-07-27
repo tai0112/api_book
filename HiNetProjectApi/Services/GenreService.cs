@@ -42,23 +42,13 @@ namespace HiNetProjectApi.Services
             return genreDTO;
         }
 
-        public async Task<IEnumerable<GenreDTO>> GetAllAsync(string? name = "", DateTime? timeCreated = null, DateTime? timeUpdated = null)
+        public async Task<IEnumerable<GenreDTO>> GetAllAsync(SearchGenreDTO search)
         {
             var genres = genreRepository.GetAllAsync();
 
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(search.Name))
             {
-                genres = genres.Where(o => o.Name.Contains(name));
-            }
-
-            if (timeCreated != null)
-            {
-                genres = genres.Where(o => o.CreateAt.Equals(timeCreated));
-            }
-
-            if (timeUpdated != null)
-            {
-                genres = genres.Where(o => o.UpdateAt.Equals(timeUpdated));
+                genres = genres.Where(o => o.Name.Contains(search.Name));
             }
 
             var result = await genres.ToListAsync();

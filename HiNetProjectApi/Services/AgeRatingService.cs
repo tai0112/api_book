@@ -37,17 +37,17 @@ namespace HiNetProjectApi.Services
             return mapper.Map<AgeRatingDTO>(ageRatingDomain);
         }
 
-        public async Task<IEnumerable<AgeRatingDTO?>> GetAgeRatingsAsync(string name, string description)
+        public async Task<IEnumerable<AgeRatingDTO?>> GetAgeRatingsAsync(SearchAgeRatingDTO search)
         {
             var ageRating = ageRatingRepository.GetAllAsync();
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(search.Name))
             {
-                ageRating = ageRating.Where(x => x.Name.Contains(name));
+                ageRating = ageRating.Where(x => x.Name.Contains(search.Name));
             }
 
-            if (!string.IsNullOrEmpty(description))
+            if (!string.IsNullOrEmpty(search.Description))
             {
-                ageRating = ageRating.Where(x =>x.Description.Contains(description));
+                ageRating = ageRating.Where(x =>x.Description.Contains(search.Description));
             }
 
             var result = await ageRating.ToListAsync();

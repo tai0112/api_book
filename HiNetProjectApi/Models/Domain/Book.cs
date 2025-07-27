@@ -40,6 +40,7 @@ namespace HiNetProjectApi.Models.Domain
         public SubGenre SubGenre { get; set; }
         public Publisher Publisher { get; set; }
         public AgeRating AgeRating { get; set; }
+        public IEnumerable<BookImage> BookImages { get; set; }
 
     }
 }

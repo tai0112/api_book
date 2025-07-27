@@ -22,7 +22,7 @@ namespace HiNetProjectApi.Repository
 
         public IQueryable<CartDetail?> GetAllAsync()
         {
-            return db.CartDetails.AsQueryable();
+            return db.CartDetails.AsNoTracking().AsQueryable();
         }
 
         public async Task<CartDetail?> GetByIdAsync(Guid id)

@@ -2,7 +2,6 @@
 {
     public class BaseBookDTO
     {
-        public string Code { get; set; }
         public string Name { get; set; }
         public string Note { get; set; }
         public string Author { get; set; }
@@ -17,8 +16,9 @@
         public int PageTotal { get; set; }
         public int YearPublish { get; set; }
         public bool IsActived { get; set; }
-        public Guid SubGenreId { get; set; }
-        public Guid CoverTypeId { get; set; }
+        public Guid? SubGenreId { get; set; }
+        public Guid? GenreId { get; set; }
+        public Guid? CoverTypeId { get; set; }
         public Guid AgeRatingId { get; set; }
         public int SoldTotal { get; set; }
         public string? Translate { get; set; }

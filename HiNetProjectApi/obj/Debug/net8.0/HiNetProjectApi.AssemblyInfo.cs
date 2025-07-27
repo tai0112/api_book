@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HiNetProjectApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b23897fff5e66784a63aac6eb2038dd1a4ef8296")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+affbb7f175f14c0e3d8b0f21c528db583ee4c2e7")]
 [assembly: System.Reflection.AssemblyProductAttribute("HiNetProjectApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HiNetProjectApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
