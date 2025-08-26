@@ -4,6 +4,7 @@ using HiNetProjectApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HiNetProjectApi.Migrations
 {
     [DbContext(typeof(BookEcommerceDbContext))]
-    partial class BookEcommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250729031328_remove relationship notification table")]
+    partial class removerelationshipnotificationtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,61 +46,61 @@ namespace HiNetProjectApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("12f4aec5-fd3d-4bdf-a518-0102669e8992"),
+                            Id = new Guid("38c9a5bc-fd16-4cfe-98ad-8596885823a6"),
                             Description = "Phù hợp với mọi lứa tuổi, kể cả trẻ sơ sinh và mẫu giáo.",
                             Name = "0+"
                         },
                         new
                         {
-                            Id = new Guid("7a215ea4-0e74-44cf-adc1-c2dc911b2a3b"),
+                            Id = new Guid("af95f5a2-e88b-42d7-882f-91cf6367a84b"),
                             Description = "Dành cho trẻ em từ 3 tuổi trở lên. Nội dung đơn giản, không có yếu tố bạo lực hoặc gây sợ hãi.",
                             Name = "3+"
                         },
                         new
                         {
-                            Id = new Guid("a03c7509-3275-4439-b527-5be02170b7aa"),
+                            Id = new Guid("6927136d-8256-4d1a-942c-2dde892dce2d"),
                             Description = "Dành cho trẻ em bắt đầu đọc, có thể có nội dung giáo dục và tưởng tượng nhẹ.",
                             Name = "6+"
                         },
                         new
                         {
-                            Id = new Guid("f1cbe78b-85f3-4274-aba6-2197f55fd4fb"),
+                            Id = new Guid("2c994161-5662-443b-b9ab-6c6c0953135d"),
                             Description = "Dành cho trẻ em cấp 1 trở lên. Nội dung có thể bao gồm xung đột nhẹ hoặc bài học đạo đức.",
                             Name = "10+"
                         },
                         new
                         {
-                            Id = new Guid("f27308c5-168d-496c-a4c4-fef56543b969"),
+                            Id = new Guid("3c434270-31a1-4789-b7a0-6942f677faf3"),
                             Description = "Dành cho thiếu niên. Có thể đề cập đến các vấn đề xã hội, học đường, tâm lý tuổi mới lớn.",
                             Name = "12+"
                         },
                         new
                         {
-                            Id = new Guid("f03ec229-3db8-4b31-82ab-9e869deaf721"),
+                            Id = new Guid("c27c3947-f242-45b4-b4a5-a51157948037"),
                             Description = "Nội dung phức tạp hơn, phù hợp với học sinh cấp 3. Có thể có yếu tố tình cảm hoặc suy nghĩ cá nhân.",
                             Name = "15+"
                         },
                         new
                         {
-                            Id = new Guid("02ca209e-ae60-458a-a953-a8388d94e07a"),
+                            Id = new Guid("f6c382a6-4c15-4cbe-bfa2-52adcaf2515b"),
                             Description = "Có thể có yếu tố bạo lực nhẹ, ngôn ngữ mạnh hoặc đề cập đến các chủ đề xã hội nghiêm túc.",
                             Name = "16+"
                         },
                         new
                         {
-                            Id = new Guid("f299fc14-f097-4561-9d24-16223f0872ed"),
+                            Id = new Guid("95de34ad-3e2a-4fd7-93f4-1cad58fef562"),
                             Description = "Dành cho người trưởng thành. Có thể chứa nội dung bạo lực, tâm lý phức tạp hoặc tình dục.",
                             Name = "18+"
                         },
                         new
                         {
-                            Id = new Guid("7e05113c-709f-4515-aaaa-c0066b04f534"),
+                            Id = new Guid("5f017f33-c136-41e6-814c-3f218f88aff6"),
                             Description = "Phù hợp với học sinh từ tiểu học đến trung học.",
                             Name = "Học sinh"
                         },
                         new
                         {
-                            Id = new Guid("54785580-e7bc-441e-8f01-a1cfc1f8e6bc"),
+                            Id = new Guid("44c67b72-1032-4e8f-9ec4-d39ead0e529d"),
                             Description = "Dành cho người trưởng thành trẻ tuổi với nội dung chuyên môn, phát triển bản thân, hoặc kỹ năng sống.",
                             Name = "Sinh viên - Người đi làm"
                         });
@@ -209,15 +212,6 @@ namespace HiNetProjectApi.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FlashSaleDateEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FlashSaleDateStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float?>("FlashSalePrice")
-                        .HasColumnType("real");
-
                     b.Property<Guid?>("GenreId")
                         .HasColumnType("uniqueidentifier");
 
@@ -225,12 +219,6 @@ namespace HiNetProjectApi.Migrations
                         .HasColumnType("real");
 
                     b.Property<bool>("IsActived")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFalshSale")
                         .HasColumnType("bit");
 
                     b.Property<string>("Language")
@@ -396,12 +384,12 @@ namespace HiNetProjectApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("15b942a0-9cc0-4a34-9675-aa10627579fc"),
+                            Id = new Guid("a2fb3a98-5683-4fd2-9c48-a4e5dbbeb89b"),
                             Name = "Bìa mềm"
                         },
                         new
                         {
-                            Id = new Guid("a8a5fd97-8901-4778-98e7-2e6f1d38f590"),
+                            Id = new Guid("e8bf47c9-d940-4385-85a3-6295e9b78a33"),
                             Name = "Bìa cứng"
                         });
                 });
@@ -429,73 +417,73 @@ namespace HiNetProjectApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fe33fd07-7d32-4fcf-bef6-71c030fadf5f"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6690),
+                            Id = new Guid("e0a150e3-3d1f-4366-b1b7-8a146533f866"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(2991),
                             Name = "Văn học",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6693)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(2995)
                         },
                         new
                         {
-                            Id = new Guid("f990a8e9-877b-4101-bd6e-09562b8f85ba"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6698),
+                            Id = new Guid("5d28fe8b-a1b2-43a2-b592-a050dc33d7a0"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(2999),
                             Name = "Kinh tế",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6698)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3000)
                         },
                         new
                         {
-                            Id = new Guid("bfc1827f-1d61-4998-950e-3335c8cbbc85"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6700),
+                            Id = new Guid("87841a60-e8ea-4daa-b38d-03b78829ca6b"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3004),
                             Name = "Kỹ năng sống",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6701)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3005)
                         },
                         new
                         {
-                            Id = new Guid("13eed41e-5bc4-4f33-b952-e891475b740b"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6703),
+                            Id = new Guid("bf8234f7-6973-4d62-8108-ef2f9c4dad31"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3007),
                             Name = "Giáo dục",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6704)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3007)
                         },
                         new
                         {
-                            Id = new Guid("f739e232-8d60-400b-a961-9d4c57452795"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6708),
+                            Id = new Guid("588059f6-ce07-4c98-8146-f39b06adb01e"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3009),
                             Name = "Khoa học - Công nghệ",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6708)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3010)
                         },
                         new
                         {
-                            Id = new Guid("301fce0e-2f51-4438-b79e-8c4e46a2a057"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6712),
+                            Id = new Guid("1a714fee-5b7f-4ee5-a8cf-4feabf2b6d0e"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3014),
                             Name = "Tâm lý - Tình cảm",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6712)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3014)
                         },
                         new
                         {
-                            Id = new Guid("c21d85d9-c9d6-4c94-a78d-6e5fc2d8feba"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6714),
+                            Id = new Guid("89af6711-5ac5-4258-89b7-afc7c90eacc2"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3016),
                             Name = "Thiếu nhi",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6715)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3017)
                         },
                         new
                         {
-                            Id = new Guid("6b7da774-ffac-4f59-8763-341561a42f00"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6717),
+                            Id = new Guid("24365f1d-bbcc-4100-8b86-990fa22cb957"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3019),
                             Name = "Lịch sử",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6717)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3019)
                         },
                         new
                         {
-                            Id = new Guid("048d1143-2c91-4d1f-ad62-3721fcb317e5"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6720),
+                            Id = new Guid("c0ea0e79-5e2a-4381-8131-a7bed0d0025e"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3021),
                             Name = "Văn hóa - Xã hội",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6720)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3022)
                         },
                         new
                         {
-                            Id = new Guid("605b92f1-3a15-422e-9873-36c5a202cd36"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6723),
+                            Id = new Guid("276df91e-a552-497c-b95f-917899412204"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3025),
                             Name = "Tiểu sử - Hồi ký",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6724)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3025)
                         });
                 });
 
@@ -631,52 +619,52 @@ namespace HiNetProjectApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6b556978-7e53-447b-a66a-e522611cd2a9"),
+                            Id = new Guid("5310bdd6-cf31-452a-8e52-d32bb601a4a4"),
                             Name = "Nhà xuất bản Kim Đồng"
                         },
                         new
                         {
-                            Id = new Guid("0e6fe122-7dd9-47b7-ac3e-770317c3b68d"),
+                            Id = new Guid("d350bcd9-2525-48c6-9d69-46bae4aec52f"),
                             Name = "Nhà xuất bản Trẻ"
                         },
                         new
                         {
-                            Id = new Guid("901a3cea-bc9a-4f5a-a917-adffa32c5afb"),
+                            Id = new Guid("ea9957e6-7db0-4da0-b424-71d294ca4762"),
                             Name = "Nhà xuất bản Tổng hợp TP.HCM"
                         },
                         new
                         {
-                            Id = new Guid("94916549-00cb-4dec-8e9f-802e2f385197"),
+                            Id = new Guid("7884d857-6363-41f5-b691-276d611da010"),
                             Name = "Nhà xuất bản Lao Động"
                         },
                         new
                         {
-                            Id = new Guid("30bbf0ec-ea16-408f-8a94-77ce85991109"),
+                            Id = new Guid("06c81552-4b1c-4428-8b10-74a42d58a316"),
                             Name = "Nhà xuất bản Văn Học"
                         },
                         new
                         {
-                            Id = new Guid("584ff679-5700-4862-907d-e456cfc1993d"),
+                            Id = new Guid("435af5c4-8992-4c94-b98f-7f483815c165"),
                             Name = "Nhà xuất bản Giáo Dục Việt Nam"
                         },
                         new
                         {
-                            Id = new Guid("2429a247-4aaa-4e46-abe3-d2569be2393a"),
+                            Id = new Guid("a14f4aff-db64-487c-b6ae-8e38c62c9443"),
                             Name = "Nhà xuất bản Chính Trị Quốc Gia Sự Thật"
                         },
                         new
                         {
-                            Id = new Guid("5df8eef1-6d11-4850-8fae-f244c974b99a"),
+                            Id = new Guid("a9e42029-4533-443c-a991-77c4fd025983"),
                             Name = "Nhà xuất bản Hội Nhà Văn"
                         },
                         new
                         {
-                            Id = new Guid("80770998-6cde-4af1-be3b-09aec826ca8d"),
+                            Id = new Guid("cf1cafe6-f572-4fda-865e-b5c474a40c95"),
                             Name = "Nhà xuất bản Thanh Niên"
                         },
                         new
                         {
-                            Id = new Guid("905ed108-dd02-43ca-8bb2-7b41c97d91f0"),
+                            Id = new Guid("d018a1ac-7815-45e0-abdf-227f64144ecb"),
                             Name = "Nhà xuất bản Phụ Nữ"
                         });
                 });
@@ -735,83 +723,83 @@ namespace HiNetProjectApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("de55a2cd-b8b9-4e22-a1e8-70baa7b901c0"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6771),
-                            GenreId = new Guid("fe33fd07-7d32-4fcf-bef6-71c030fadf5f"),
+                            Id = new Guid("385e8fe9-2380-4ec5-97df-230996f7b285"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3094),
+                            GenreId = new Guid("e0a150e3-3d1f-4366-b1b7-8a146533f866"),
                             Name = "Tiểu thuyết",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6773)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3094)
                         },
                         new
                         {
-                            Id = new Guid("061b82ac-7ffd-4017-aec9-5c52f4dc0dbc"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6777),
-                            GenreId = new Guid("fe33fd07-7d32-4fcf-bef6-71c030fadf5f"),
+                            Id = new Guid("d15299ce-aba5-4123-903c-8a612e363b40"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3100),
+                            GenreId = new Guid("e0a150e3-3d1f-4366-b1b7-8a146533f866"),
                             Name = "Truyện ngắn",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6777)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3101)
                         },
                         new
                         {
-                            Id = new Guid("e4eb0185-3037-4caf-85ad-10b6fb923260"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6782),
-                            GenreId = new Guid("fe33fd07-7d32-4fcf-bef6-71c030fadf5f"),
+                            Id = new Guid("493baa5b-9751-417b-8b10-c9f259168b7b"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3104),
+                            GenreId = new Guid("e0a150e3-3d1f-4366-b1b7-8a146533f866"),
                             Name = "Thơ",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6783)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3104)
                         },
                         new
                         {
-                            Id = new Guid("bcf2ff5f-47ff-4ab0-9e56-b528bab5f8fe"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6785),
-                            GenreId = new Guid("f990a8e9-877b-4101-bd6e-09562b8f85ba"),
+                            Id = new Guid("dbfbfd37-a68e-4c0b-99be-58ee7a091071"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3173),
+                            GenreId = new Guid("5d28fe8b-a1b2-43a2-b592-a050dc33d7a0"),
                             Name = "Marketing",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6786)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3174)
                         },
                         new
                         {
-                            Id = new Guid("cdd2894c-d0da-4a31-a8ec-dc42d7aefd36"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6788),
-                            GenreId = new Guid("f990a8e9-877b-4101-bd6e-09562b8f85ba"),
+                            Id = new Guid("6f9a9ecb-7a79-45ea-88a2-ee0de24e964a"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3176),
+                            GenreId = new Guid("5d28fe8b-a1b2-43a2-b592-a050dc33d7a0"),
                             Name = "Khởi nghiệp",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6788)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3177)
                         },
                         new
                         {
-                            Id = new Guid("7aabc18b-dca5-4e6d-af5c-8f6c15e602e9"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6793),
-                            GenreId = new Guid("bfc1827f-1d61-4998-950e-3335c8cbbc85"),
+                            Id = new Guid("ea934d49-64d7-4030-9830-f6938462d6bd"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3181),
+                            GenreId = new Guid("87841a60-e8ea-4daa-b38d-03b78829ca6b"),
                             Name = "Phát triển bản thân",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6793)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3181)
                         },
                         new
                         {
-                            Id = new Guid("16022f8f-c6df-4bc3-8edf-501c17f01b4a"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6797),
-                            GenreId = new Guid("bfc1827f-1d61-4998-950e-3335c8cbbc85"),
+                            Id = new Guid("d3ad3b7e-f881-456c-9fc8-89156c55a2c8"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3184),
+                            GenreId = new Guid("87841a60-e8ea-4daa-b38d-03b78829ca6b"),
                             Name = "Tư duy tích cực",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6798)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3184)
                         },
                         new
                         {
-                            Id = new Guid("f1a8ccf0-4f42-4395-b5fa-bc2392146b83"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6801),
-                            GenreId = new Guid("bfc1827f-1d61-4998-950e-3335c8cbbc85"),
+                            Id = new Guid("256702e8-a815-45e1-9561-6e52be3ab65f"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3186),
+                            GenreId = new Guid("87841a60-e8ea-4daa-b38d-03b78829ca6b"),
                             Name = "Kỹ năng giao tiếp",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6801)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3187)
                         },
                         new
                         {
-                            Id = new Guid("a0ecb6d7-2426-4d1a-b486-2499bf2a558b"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6804),
-                            GenreId = new Guid("13eed41e-5bc4-4f33-b952-e891475b740b"),
+                            Id = new Guid("e1a98a44-b60e-492a-88af-2c6a27afe285"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3192),
+                            GenreId = new Guid("bf8234f7-6973-4d62-8108-ef2f9c4dad31"),
                             Name = "Giáo dục sớm",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6804)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3192)
                         },
                         new
                         {
-                            Id = new Guid("abcfaafe-d8da-45c2-b7ce-83347939fdbb"),
-                            CreateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6808),
-                            GenreId = new Guid("13eed41e-5bc4-4f33-b952-e891475b740b"),
+                            Id = new Guid("d7233a86-3d42-4850-bf68-d44a845d7856"),
+                            CreateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3196),
+                            GenreId = new Guid("bf8234f7-6973-4d62-8108-ef2f9c4dad31"),
                             Name = "Tâm lý học đường",
-                            UpdateAt = new DateTime(2025, 8, 21, 3, 3, 20, 412, DateTimeKind.Utc).AddTicks(6808)
+                            UpdateAt = new DateTime(2025, 7, 29, 3, 13, 27, 843, DateTimeKind.Utc).AddTicks(3196)
                         });
                 });
 

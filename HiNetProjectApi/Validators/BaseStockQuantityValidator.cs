@@ -8,7 +8,7 @@ namespace HiNetProjectApi.Validators
     {
         public BaseStockQuantityValidator()
         {
-            RuleFor(o => o.Quantities).NotEmpty().GreaterThan(-1);
+            RuleFor(o => o.Quantities).GreaterThan(-1);
             RuleFor(o => o.BookId).NotEmpty();
         }
     }

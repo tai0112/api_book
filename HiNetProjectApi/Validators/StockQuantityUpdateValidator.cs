@@ -7,7 +7,6 @@ namespace HiNetProjectApi.Validators
     {
         public StockQuantityUpdateValidator()
         {
-            RuleFor(o => o.Id).NotEmpty();
             Include(new BaseStockQuantityValidator<UpdateStockQuantityRequestDTO>());
         }
     }

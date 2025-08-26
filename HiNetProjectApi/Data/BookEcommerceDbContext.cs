@@ -26,6 +26,7 @@ namespace HiNetProjectApi.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<StockQuantity> StockQuantities { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Order>()

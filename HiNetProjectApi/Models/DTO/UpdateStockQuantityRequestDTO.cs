@@ -2,6 +2,5 @@
 {
     public class UpdateStockQuantityRequestDTO : BaseStockQuantityDTO
     {
-        public Guid Id { get; set; }
     }
 }

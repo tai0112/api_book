@@ -17,8 +17,9 @@ namespace HiNetProjectApi.Services
         private readonly IMapper mapper;
         private readonly IBookImageService bookImageService;
         private readonly ILogService logger;
+        private readonly IStockQuantityService stockQuantityService;
 
-        public BookService(IBookRepository bookRepository, IValidator<AddBookRequestDTO> addValidator, IValidator<UpdateBookRequestDTO> updateValidator, IMapper mapper, IBookImageService bookImageService, ILogService logger)
+        public BookService(IBookRepository bookRepository, IValidator<AddBookRequestDTO> addValidator, IValidator<UpdateBookRequestDTO> updateValidator, IMapper mapper, IBookImageService bookImageService, ILogService logger, IStockQuantityService stockQuantityService)
         {
             this.bookRepository = bookRepository;
             this.addValidator = addValidator;
@@ -26,6 +27,7 @@ namespace HiNetProjectApi.Services
             this.mapper = mapper;
             this.bookImageService = bookImageService;
             this.logger = logger;
+            this.stockQuantityService = stockQuantityService;
         }
         public async Task<BookDTO> CreateAsync(AddBookRequestDTO addBookRequestDTO)
         {
@@ -39,6 +41,11 @@ namespace HiNetProjectApi.Services
                 var bookDomain = mapper.Map<Book>(addBookRequestDTO);
                 bookDomain.Code = GenerateProductCode();
                 var book = await bookRepository.CreateAsync(bookDomain);
+                await stockQuantityService.CreateAsync(new AddStockQuantityDTO
+                {
+                    BookId = book.Id,
+                    Quantities = 0,
+                });
                 return mapper.Map<BookDTO>(book);
             }
             catch (DbUpdateException ex)
@@ -133,6 +140,7 @@ namespace HiNetProjectApi.Services
             try
             {
                 await bookImageService.RemoveRange(search);
+                await stockQuantityService.RemoveAsyncByBookId(search.BookId);
                 return mapper.Map<BookDTO>(book);
             }
             catch (DbUpdateException ex)

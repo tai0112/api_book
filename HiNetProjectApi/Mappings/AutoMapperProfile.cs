@@ -18,6 +18,7 @@ namespace HiNetProjectApi.Mappings
             CreateMap<AgeRatingDTO, AgeRating>().ReverseMap();
             CreateMap<AddAgeRatingRequestDTO, AgeRating>().ReverseMap();
             CreateMap<UpdateAgeRatingRequestDTO, AgeRating>().ReverseMap();
+            CreateMap<UpdateRequestAgeRatingDTO, AgeRating>().ReverseMap();
 
             //SubGenre mapper
             CreateMap<SubGenre, SubGenreDTO>().ReverseMap();
@@ -69,7 +70,11 @@ namespace HiNetProjectApi.Mappings
             CreateMap<BookImage, BookImageDTO>().ReverseMap();
             CreateMap<BookImage, AddBookImageRequestDTO>().ReverseMap();
             CreateMap<BookImage, UpdateBookImageRequestDTO>().ReverseMap();
-            
+
+            //Notification
+            CreateMap<Notification, NotificationDTO>().ReverseMap();
+            CreateMap<AddRequestNotificationDTO, Notification>().ReverseMap();
+            CreateMap<UpdateRequestNotificationDTO, Notification>().ReverseMap();
 
         }
     }

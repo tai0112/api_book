@@ -26,6 +26,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//SignalR
+builder.Services.AddSignalR();
+
 //Config CORS
 builder.Services.AddCors(options => options.AddPolicy("AllowFrontEnd", policy =>
 {

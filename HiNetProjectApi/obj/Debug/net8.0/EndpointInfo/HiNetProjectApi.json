@@ -1166,11 +1166,19 @@
         ],
         "parameters": [
           {
-            "name": "bookId",
+            "name": "BookId",
             "in": "query",
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "Quantities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -2061,10 +2069,6 @@
           "quantities": {
             "type": "integer",
             "format": "int32"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false

@@ -39,12 +39,16 @@ namespace HiNetProjectApi.Services
 
         }
 
-        public async Task<IEnumerable<StockQuantityDTO?>> GetAllAsync(Guid? bookId)
+        public async Task<IEnumerable<StockQuantityDTO?>> GetAllAsync(SearchStockQuantitiesDTO search)
         {
             var stockQuantities = stockQuantityRepository.GetAllAsync();
-            if (bookId != Guid.Empty && bookId != null)
+            if (search.BookId != null && search.BookId != Guid.Empty)
             {
-                stockQuantities = stockQuantities.Where(x => x.BookId == bookId);
+                stockQuantities = stockQuantities.Where(x => x.BookId == search.BookId);
+            }
+            if (search.Quantities > 0)
+            {
+                stockQuantities = stockQuantities.Where(x => x.Quantities >= search.Quantities);
             }
             var result = await stockQuantities.ToListAsync();
             return mapper.Map<List<StockQuantityDTO?>>(result);
@@ -77,6 +81,26 @@ namespace HiNetProjectApi.Services
         {
             var stockQuantity = await stockQuantityRepository.RemoveAsync(id);
             return mapper.Map<StockQuantityDTO>(stockQuantity);
+        }
+
+        public async Task<StockQuantityDTO?> RemoveAsyncByBookId(Guid bookId)
+        {
+            var search = new SearchStockQuantitiesDTO
+            {
+                BookId = bookId
+            };
+            var stockQuantities = await GetAllAsync(search);
+            if (stockQuantities == null || !stockQuantities.Any())
+            {
+                return null;
+            }
+            var stockQuantity = stockQuantities.FirstOrDefault();
+            if (stockQuantity == null)
+            {
+                return null;
+            }
+            var removedStockQuantity = await stockQuantityRepository.RemoveAsync(stockQuantity.Id);
+            return mapper.Map<StockQuantityDTO>(removedStockQuantity);
         }
 
         public async Task<StockQuantityDTO?> UpdateAsync(Guid id, UpdateStockQuantityRequestDTO updateStockQuantity)

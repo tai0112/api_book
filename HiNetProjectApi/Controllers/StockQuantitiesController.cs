@@ -17,11 +17,11 @@ namespace HiNetProjectApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] Guid? bookId)
+        public async Task<IActionResult> GetAll([FromQuery] SearchStockQuantitiesDTO search)
         {
             try
             {
-                var stockQuantities = await stockQuantityService.GetAllAsync(bookId);
+                var stockQuantities = await stockQuantityService.GetAllAsync(search);
                 return Ok(stockQuantities);
             }
             catch (Exception ex)

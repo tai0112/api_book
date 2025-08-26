@@ -32,6 +32,11 @@ namespace HiNetProjectApi.Models.Domain
         public int SoldTotal { get; set; }
         public string? Translate { get; set; }
         public Guid PublisherId { get; set; }
+        public bool IsFalshSale { get; set; } = false;
+        public float? FlashSalePrice { get; set; } = 0;
+        public DateTime FlashSaleDateStart { get; set; }
+        public DateTime FlashSaleDateEnd { get; set; }
+        public bool IsDeleted { get; set; } = false;
         //Navigation properties
         public CoverType CoverType { get; set; }
         [JsonIgnore]
